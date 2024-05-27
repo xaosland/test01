@@ -21,16 +21,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('https://img.goodfon.ru/wallpaper/nbig/b/ca/view-looks-eye-hides-minimal.webp');
+  background-image: url('https://img.goodfon.ru/wallpaper/nbig/f/dc/pryanik-pryanikovyy-chelovechek.webp');
   background-position: center center;
 }
 
 .textfield {
+  border-top-left-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
   gap: 20px;
+  background-color: white;
+  padding: 40px;
+}
+
+.table_page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://img.goodfon.ru/wallpaper/nbig/5/c7/novyy-god-rozhdestvo-krasnyy.webp');
+  background-position: center center;
 }
 
 table {

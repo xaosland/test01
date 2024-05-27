@@ -6,8 +6,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { DocumentsTable } from '../pages/documentsTable.tsx'
-import { Login } from '../pages/login.tsx'
+import { DocumentsTable } from '@/pages/documentsTable'
+import { Login } from '@/pages/login'
 
 const publicRoutes: RouteObject[] = [
   {

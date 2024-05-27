@@ -1,9 +1,10 @@
+import { EditableSpan } from '@/pages/edit'
 import {
   useDeleteDocumentMutation,
   useGetDocumentsQuery,
   useUpdateDocumentMutation,
-} from '../service/api.ts'
-import { EditableSpan } from './edit.tsx'
+} from '@/service/api'
+import Button from '@mui/material/Button'
 
 export function DocumentsTable() {
   const { data, error, isLoading } = useGetDocumentsQuery()
@@ -35,9 +36,10 @@ export function DocumentsTable() {
   }
 
   return (
-    <div className={'card'}>
+    <div className={'table_page'}>
       <div className={'card-header'}>
-        <table className={'responsive-table'}>
+        DoubleClick to edit 🥰🥰
+        <table>
           <thead>
             <tr>
               <th>дата регистрации компании</th>
@@ -105,7 +107,7 @@ export function DocumentsTable() {
                   />
                 </td>
                 <td>
-                  <button onClick={() => handleDeleteDocument(document.id)}>Удалить</button>
+                  <Button onClick={() => handleDeleteDocument(document.id)}>Удалить</Button>
                 </td>
               </tr>
             ))}
