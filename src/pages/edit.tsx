@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
-import { TypeDocument } from '../service/documents.type.ts'
+import { TypeDocument } from '@/service/documents.type'
 
 type EditPropsType = {
   document: TypeDocument
@@ -8,13 +8,14 @@ type EditPropsType = {
   onChange: (documentID: string, field: string, value: string) => void
 }
 
-export const EditableSpan = React.memo(function (props: EditPropsType) {
+export const EditableSpan = function (props: EditPropsType) {
   const [editMode, setEditMode] = useState(false)
   const [field, setField] = useState(props.document[props.field])
   const activateEditMode = () => {
     setEditMode(true)
   }
 
+  console.log('edit span')
   const activateViewMode = () => {
     setEditMode(false)
     if (field.trim() !== ' ') {
@@ -37,4 +38,4 @@ export const EditableSpan = React.memo(function (props: EditPropsType) {
   ) : (
     <span onDoubleClick={activateEditMode}>{field}</span>
   )
-})
+}

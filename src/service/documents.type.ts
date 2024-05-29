@@ -1,4 +1,4 @@
-export type TypeDocument = {
+export type Document = {
   companySigDate: string
   companySignatureName: string
   documentName: string
@@ -11,5 +11,5 @@ export type TypeDocument = {
 }
 
 export type GetDocumentsResponse = {
-  data: TypeDocument[]
+  data: Document[]
 }

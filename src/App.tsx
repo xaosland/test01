@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 
-import { Routes } from '@/service/routes.tsx'
-import store from '@/service/store.ts'
+import { Router } from '@/service/router'
+import store from '@/service/store'
 
 import './assets/reset.css'
 import './assets/style.css'
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <Routes />
+        <Router />
       </Provider>
     </>
   )

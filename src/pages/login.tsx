@@ -1,78 +1,63 @@
-import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, TextField, Typography } from '@mui/material'
-import CircularProgress from '@mui/material/CircularProgress'
+import { useLoginMutation } from '@/service/auth.service'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
 
-import { useLoginMutation } from '../service/api.ts'
+type FormValues = {
+  password: string
+  username: string
+}
+const regex = /^user\d{1,2}$/
 
-export function Login() {
-  const [login, { isLoading }] = useLoginMutation()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+export const LoginForm = () => {
+  const [login] = useLoginMutation() // Использование хука useLoginMutation
+  const navigate = useNavigate() // Использование хука useNavigate для пере
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<FormValues>()
 
-  const navigate = useNavigate()
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const onSubmit = async (data: FormValues) => {
     try {
-      const response = await login({ password, username }).unwrap()
-      const token = response.data.token
+      const result = await login(data).unwrap() // Вызов мутации login с данными формы
 
-      if (token) {
-        localStorage.setItem('token', token)
-        navigate('/')
-      } else {
-        setErrorMessage('Invalid response or missing token field')
-      }
-    } catch (error) {
-      setErrorMessage('Invalid response or missing token field')
-    }
-  }
-
-  if (isLoading) {
-    return (
-      <div className={'card'}>
-        <CircularProgress color={'secondary'} />
-      </div>
-    )
+      navigate('/')
+    } catch (error) {}
   }
 
   return (
     <div className={'login_page'}>
       <div className={'login_form'}>
-        {errorMessage && (
-          <Typography color={'error'} variant={'body1'}>
-            {errorMessage}
-          </Typography>
-        )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={'textfield'}>
-            <div>
-              <TextField
-                fullWidth
-                label={'Username'}
-                onChange={e => setUsername(e.target.value)}
-                variant={'outlined'}
-              />
-            </div>
-
-            <div>
-              <TextField
-                fullWidth
-                label={'Password'}
-                onChange={e => setPassword(e.target.value)}
-                type={'password'}
-                variant={'outlined'}
-              />
-            </div>
+            <TextField
+              error={!!errors.username}
+              fullWidth
+              label={'Error'}
+              {...register('username', {
+                pattern: { message: 'Invalid user name', value: regex },
+                required: 'UserName is required',
+              })}
+              label={errors.username ? errors.username.message : 'UserName'}
+            />
+            <TextField
+              error={!!errors.password}
+              fullWidth
+              laberl={errors.password ? errors.password.message : 'Password'}
+              type={'password'}
+              {...register('password', {
+                minLength: { message: 'Password has to be Password', value: 3 },
+                required: 'Password is required',
+              })}
+              label={'password'}
+            />
           </div>
-          <div className={'mybutton'}>
-            <Button fullWidth type={'submit'} variant={'contained'}>
-              Login
-            </Button>
-          </div>
+          <Button fullWidth type={'submit'} variant={'contained'}>
+            Submit
+          </Button>
         </form>
       </div>
     </div>
