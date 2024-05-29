@@ -12,5 +12,5 @@ export function DecksPage() {
     return <div>Error: {JSON.stringify(error)}</div>
   }
 
-  return <DecksTable decks={data?.items} />
+  return <DecksTable data={data} />
 }

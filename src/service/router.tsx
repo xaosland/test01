@@ -7,9 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/layout/layout'
-import { DocumentsTable } from '@/pages/documentsTable'
+import { DecksPage } from '@/pages/decks.page'
 import { LoginForm } from '@/pages/login'
-import FullFeaturedCrudGrid from '@/pages/table'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -20,11 +19,11 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <DocumentsTable />,
+    element: <DecksPage />,
     path: '/',
   },
   {
-    element: <FullFeaturedCrudGrid />,
+    element: <DecksPage />,
     path: '/table',
   },
 ]

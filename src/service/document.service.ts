@@ -7,3 +7,4 @@ export const documentsApi = baseApi.injectEndpoints({
     }),
   }),
 })
+export const { useGetDocumentsQuery } = documentsApi
