@@ -1,3 +1,4 @@
+import { DecksTable } from '@/pages/decksTable'
 import { useGetDocumentsQuery } from '@/service/document.service'
 
 export function DecksPage() {
