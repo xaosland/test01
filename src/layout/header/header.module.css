@@ -1,0 +1,30 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #333333;
+
+    span{
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+    }
+}
+
+.logo {
+    float: left;
+    width: 80px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.buttonHeader {
+    display: flex;
+    gap: 20px;
+}

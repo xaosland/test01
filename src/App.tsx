@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 
-import { Router } from '@/service/router'
-import store from '@/service/store'
+import { Router } from '@/router/router'
+import { store } from '@/service/store'
 
 import './assets/reset.css'
 import './assets/style.css'
