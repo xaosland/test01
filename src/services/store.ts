@@ -1,4 +1,5 @@
-import { tableApi } from '@/service/table/tabel.service'
+import { authApi } from '@/services/auth/auth.service'
+import { tableApi } from '@/services/table/tabel.service'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({

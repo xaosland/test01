@@ -1,31 +1,32 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { Page } from '@/components/page/page'
 import { TableComponent } from '@/components/table/tableComponent'
-import { useGetDecksQuery } from '@/service/table/tabel.service'
-import { Button, CircularProgress, TextField } from '@mui/material'
+import { ControlledInput } from '@/components/ui/controlledInput'
+import { useGetDecksQuery } from '@/services/table/tabel.service'
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
+import TextField from '@mui/material/TextField'
 
 // @ts-ignore
 import s from './tablePage.module.css'
 export const TablePage = () => {
   const [search, setSearch] = useState('')
+
   const { data, error, isLoading } = useGetDecksQuery({
     name: search,
   })
 
-  if (isLoading) {
-    return (
-      <Page>
-        <CircularProgress />
-      </Page>
-    )
-  }
-  if (error) {
-    return <Page>Error: {JSON.stringify(error)}</Page>
-  }
+  const { control, handleSubmit } = useForm<{ name: string }>()
+
+  const onSubmit = handleSubmit(data => {
+    console.log(data)
+  })
 
   return (
     <Page>
+      {isLoading && <CircularProgress />}
+      {error && <p>{JSON.stringify(error)}</p>}
       <TextField
         className={s.tablePage}
         fullWidth
@@ -34,10 +35,14 @@ export const TablePage = () => {
         value={search}
       />
       <br />
-      <Button fullWidth variant={'contained'}>
-        Add Card
-      </Button>
-      <TableComponent data={data} search={search} />
+
+      <p />
+      <form onSubmit={onSubmit}>
+        <ControlledInput control={control} label={'new deck name'} name={'name'} />
+        <button>create deck</button>
+      </form>
+      <p />
+      <TableComponent data={data?.items} search={search} />
     </Page>
   )
 }

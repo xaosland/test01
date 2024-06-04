@@ -1,3 +1,4 @@
+import { Deck } from '@/types/table.type'
 import {
   Paper,
   Table,
@@ -9,11 +10,11 @@ import {
 } from '@mui/material'
 
 type TableUiProps = {
-  data: any
+  data: Deck[] | undefined
   search: string
 }
 export const TableComponent = ({ data }: TableUiProps) => {
-  const formatDate = dateString => {
+  const formatDate = (dateString: Date | number | string) => {
     const date = new Date(dateString)
 
     return date.toLocaleDateString('ru-RU')
@@ -28,10 +29,11 @@ export const TableComponent = ({ data }: TableUiProps) => {
             <TableCell align={'center'}>Cards</TableCell>
             <TableCell align={'center'}>Last Updated</TableCell>
             <TableCell align={'center'}>Created By</TableCell>
+            <TableCell align={'center'}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.items.map(deck => (
+          {data?.map(deck => (
             <TableRow key={deck.id}>
               <TableCell component={'th'} scope={'row'}>
                 {deck.name}
@@ -39,6 +41,7 @@ export const TableComponent = ({ data }: TableUiProps) => {
               <TableCell align={'center'}>{deck.cardsCount}</TableCell>
               <TableCell align={'center'}>{formatDate(deck.updated)}</TableCell>
               <TableCell align={'center'}>{deck.author.name}</TableCell>
+              <TableCell align={'center'}>EDIT / DELETE </TableCell>
             </TableRow>
           ))}
         </TableBody>

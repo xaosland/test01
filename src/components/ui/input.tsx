@@ -1,5 +1,8 @@
-import React from 'react'
+import TextField from '@mui/material/TextField'
 
-export const Input = () => {
-  return <div></div>
+export type TextFieldProps = {
+  value: string
+}
+export const MyTextField = ({ value }: TextFieldProps) => {
+  return <TextField value={value} />
 }
