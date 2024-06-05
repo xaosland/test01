@@ -1,5 +1,6 @@
 import { Deck } from '@/types/table.type'
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -11,9 +12,10 @@ import {
 
 type TableUiProps = {
   data: Deck[] | undefined
-  search: string
+  onDeleteClick: (id: string) => void
+  onEditClick: (id: string) => void
 }
-export const TableComponent = ({ data }: TableUiProps) => {
+export const TableComponent = ({ data, onDeleteClick, onEditClick }: TableUiProps) => {
   const formatDate = (dateString: Date | number | string) => {
     const date = new Date(dateString)
 
@@ -41,7 +43,23 @@ export const TableComponent = ({ data }: TableUiProps) => {
               <TableCell align={'center'}>{deck.cardsCount}</TableCell>
               <TableCell align={'center'}>{formatDate(deck.updated)}</TableCell>
               <TableCell align={'center'}>{deck.author.name}</TableCell>
-              <TableCell align={'center'}>EDIT / DELETE </TableCell>
+              <TableCell align={'center'}>
+                <button
+                  onClick={() => {
+                    onEditClick(deck.id)
+                  }}
+                >
+                  EDIT
+                </button>{' '}
+                /{' '}
+                <button
+                  onClick={() => {
+                    onDeleteClick(deck.id)
+                  }}
+                >
+                  DELETE
+                </button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
